@@ -1,0 +1,186 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
+The complete set of authors may be found at http://polymer.github.io/AUTHORS
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
+-->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="stylesheet" href="../Swiper/dist/css/swiper.min.css" />
+<script src="../Swiper/dist/js/swiper.min.js"></script>
+
+<dom-module id="sc-swiper">
+  <template>
+
+    <style>
+      #slides {
+        display: none;
+      }
+    </style>
+
+    <div id="slides">
+      <content></content>
+    </div>
+
+    <div class="swiper-container" id="swiper">
+
+      <div class="swiper-wrapper" id="wrapper"></div>
+
+      <div class="swiper-pagination" id="pagination"></div>
+
+      <div class="swiper-button-prev" id="prev"></div>
+      <div class="swiper-button-next" id="next"></div>
+
+      <div class="swiper-scrollbar" id="scrollbar"></div>
+
+    </div>
+  </template>
+</dom-module>
+
+<script>
+(function () {
+
+  window.Polymer({
+    is: 'sc-swiper',
+
+    listeners: {
+      'dom-change': 'initialize'
+    },
+
+    properties: {
+
+      /**
+       * Enable pagination functionality
+       */
+      pagination: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If true then clicking on pagination button will cause transition to appropriate slide
+       */
+      paginationClickable: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable navigation buttons
+       */
+      navigationButtons: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable scrollbar
+       */
+      scrollbar: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Initial slide to be shown
+       */
+      initialSlide: {
+        type: Boolean,
+        value: 0
+      },
+
+      /**
+       * Enable ARIA
+       */
+      a11y: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable continuous loop mode
+       */
+      loop: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Number of slides per view (slides visible at the same time on slider's container).
+       */
+      slidesPerView: {
+        type: String,
+        value: '1'
+      },
+
+      /**
+       * Enable keyboard control
+       */
+      keyboardControl: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Other Swiper options
+       */
+      options: {
+        type: Object,
+        value: {}
+      }
+
+    },
+
+    getOptions: function () {
+      return Object.keys(this.properties).reduce(function (options, key) {
+        if (this.$[key]) {
+          options[key] = this.$[key];
+        }
+        else if (key === 'navigationButtons') {
+          options.prevButton = this.$.prev;
+          options.nextButton = this.$.next;
+        }
+        else if (key !== 'options') {
+          options[key] = this[key];
+        }
+
+        return options;
+      }.bind(this), this.options);
+    },
+
+    initialize: function () {
+      this.async(function () {
+
+        // First clone real nodes into the wrapper
+        var slides = this.$.slides.querySelectorAll('*');
+        var wrapper = window.Polymer.dom(this.$.wrapper);
+
+        wrapper.innerHTML = '';
+
+        for (var i = 0; i < slides.length; i++) {
+          if (!/template/i.test(slides[i].tagName)) {
+            slides[i].classList.add('swiper-slide');
+            wrapper.appendChild(slides[i]);
+          }
+        }
+
+        // Then create the Swiper instance
+        this.render();
+      }.bind(this));
+    },
+
+    render: function () {
+      // TODO: figure out a nicer way for this crap...
+      if (!this.$.wrapper.clientHeight) {
+        return setTimeout(this.render.bind(this), 50);
+      }
+
+      this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
+    }
+
+  });
+
+})();
+</script>
