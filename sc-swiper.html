@@ -12,11 +12,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script src="../Swiper/dist/js/swiper.min.js"></script>
 
 <dom-module id="sc-swiper">
-  <template>
+  <template id="main">
 
     <style>
       #slides {
         display: none;
+      }
+
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .swiper-container-horizontal > .swiper-pagination {
+        bottom: 40px;
+      }
+
+      .swiper-slide .caption {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 8px;
+        font-size: 80%;
+        font-weight: bold;
       }
     </style>
 
@@ -26,14 +51,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="swiper-container" id="swiper">
 
+      <div class="swiper-pagination" id="pagination" hidden="[[!pagination]]"></div>
+
       <div class="swiper-wrapper" id="wrapper"></div>
 
-      <div class="swiper-pagination" id="pagination"></div>
+      <div class="swiper-button-prev" id="prev" hidden="[[!navigationButtons]]"></div>
+      <div class="swiper-button-next" id="next" hidden="[[!navigationButtons]]"></div>
 
-      <div class="swiper-button-prev" id="prev"></div>
-      <div class="swiper-button-next" id="next"></div>
-
-      <div class="swiper-scrollbar" id="scrollbar"></div>
+      <div class="swiper-scrollbar" id="scrollbar" hidden="[[!scrollbar]]"></div>
 
     </div>
   </template>
@@ -128,7 +153,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        */
       options: {
         type: Object,
-        value: {}
+        value: {
+        }
       }
 
     },
@@ -136,7 +162,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     getOptions: function () {
       return Object.keys(this.properties).reduce(function (options, key) {
         if (this.$[key]) {
-          options[key] = this.$[key];
+          if (this[key]) {
+            options[key] = this.$[key];
+          }
         }
         else if (key === 'navigationButtons') {
           options.prevButton = this.$.prev;
@@ -150,25 +178,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }.bind(this), this.options);
     },
 
-    initialize: function () {
-      this.async(function () {
+    initialize: function (e) {
+      if (this._initializer) {
+        clearTimeout(this._initializer);
+      }
 
+      this._initializer = setTimeout(function () {
         // First clone real nodes into the wrapper
-        var slides = this.$.slides.querySelectorAll('*');
+        var slides = this.querySelectorAll('#slides > *:not(template)');
         var wrapper = window.Polymer.dom(this.$.wrapper);
 
         wrapper.innerHTML = '';
 
         for (var i = 0; i < slides.length; i++) {
-          if (!/template/i.test(slides[i].tagName)) {
+          if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
             slides[i].classList.add('swiper-slide');
-            wrapper.appendChild(slides[i]);
+            var node = wrapper.appendChild(slides[i]);
+            node.removeEventListener('click', this.view);
+            node.addEventListener('click', this.view);
           }
         }
 
         // Then create the Swiper instance
         this.render();
-      }.bind(this));
+      }.bind(this), 10);
     },
 
     render: function () {
@@ -177,7 +210,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return setTimeout(this.render.bind(this), 50);
       }
 
+      console.log(this.getOptions());
       this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
+    },
+
+    view: function (e) {
+      e.cancelBubble = true;
+      var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
+
+      if (!url) {
+        return;
+      }
+
+      if (window.cordova && window.cordova.InAppBrowser) {
+        var options = 'location=no,hardwareback=yes';
+        window.cordova.InAppBrowser.open(url, '_blank', options);
+      }
+      else {
+        window.open(url);
+      }
     }
 
   });
