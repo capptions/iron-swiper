@@ -205,8 +205,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
             slides[i].classList.add('swiper-slide');
             var node = wrapper.appendChild(slides[i]);
-            node.removeEventListener('click', this.view);
-            node.addEventListener('click', this.view);
+            node.removeEventListener('tap', this.view);
+            node.addEventListener('tap', this.view);
           }
         }
 
