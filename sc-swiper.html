@@ -197,7 +197,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._initializer = setTimeout(function () {
         // First clone real nodes into the wrapper
         var slides = this.querySelectorAll('#slides > *:not(template)');
-        var wrapper = window.Polymer.dom(this.$.wrapper);
+        var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
 
@@ -219,6 +219,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // TODO: figure out a nicer way for this crap...
       if (!this.$.wrapper.clientHeight) {
         return setTimeout(this.render.bind(this), 50);
+      }
+
+      if (this._swiper) {
+        this._swiper.destroy();
       }
 
       this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
