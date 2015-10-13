@@ -40,6 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       :host /deep/ .swiper-slide {
+        background-color: #eeeeee;
         background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -204,9 +205,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         for (var i = 0; i < slides.length; i++) {
           if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
             slides[i].classList.add('swiper-slide');
+
             var node = wrapper.appendChild(slides[i]);
             node.removeEventListener('tap', this.view);
             node.addEventListener('tap', this.view);
+
+            var url = node.style.backgroundImage;
+            if (url) {
+              url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
+              var img = new window.Image();
+
+              img.addEventListener('error', function () {
+                this.fire('error');
+              }.bind(this));
+
+              img.src = url;
+            }
           }
         }
 
