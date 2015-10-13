@@ -8,7 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 <link rel="import" href="../polymer/polymer.html" />
-<link rel="stylesheet" href="../Swiper/dist/css/swiper.min.css" />
+<link rel="stylesheet" href="../swiper/dist/css/swiper.min.css" />
 <script src="../swiper/dist/js/swiper.min.js"></script>
 
 <dom-module id="sc-swiper">
@@ -31,12 +31,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 100%;
       }
 
-      .swiper-slide {
-        background-position: center center;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-
       .swiper-wrapper {
         height: calc(100% - 25px);
       }
@@ -45,7 +39,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         bottom: 0;
       }
 
-      .swiper-slide .caption {
+      :host /deep/ .swiper-slide {
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      :host /deep/ .swiper-slide .caption {
         display: inline-block;
         width: 100%;
         text-align: center;
