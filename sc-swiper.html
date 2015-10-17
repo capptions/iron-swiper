@@ -251,7 +251,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       if (window.cordova && window.cordova.InAppBrowser) {
-        var options = 'location=no,hardwareback=yes';
+        var options = 'location=no,hardwareback=yes,EnableViewPortScale=yes';
         window.cordova.InAppBrowser.open(url, '_blank', options);
       }
       else {
