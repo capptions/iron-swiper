@@ -224,6 +224,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
 
+        // Disable all sliding stuff for 1 or less slides
+        if (slides.length <= 1) {
+          this.set('navigationButtons', false);
+          this.set('pagination', false);
+          this.set('loop', false);
+        }
+
         // Then create the Swiper instance
         this.render();
       }.bind(this), 10);
