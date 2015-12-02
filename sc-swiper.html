@@ -186,11 +186,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           options[key] = this[key];
         }
 
+        // Disable all sliding stuff for 1 or less slides
+        if (!this._slides || this._slides.length <= 1) {
+          options.prevButton = options.nextButton = options.pagination = options.loop = false;
+        }
+
         return options;
       }.bind(this), this.options);
     },
 
-    initialize: function (e) {
+    initialize: function () {
       if (this._initializer) {
         clearTimeout(this._initializer);
       }
@@ -224,14 +229,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
 
-        // Disable all sliding stuff for 1 or less slides
-        if (slides.length <= 1) {
-          this.set('navigationButtons', false);
-          this.set('pagination', false);
-          this.set('loop', false);
-        }
-
         // Then create the Swiper instance
+        this._slides = slides;
         this.render();
       }.bind(this), 10);
     },
