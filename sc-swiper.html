@@ -206,6 +206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
+        this._slides = [];
 
         for (var i = 0; i < slides.length; i++) {
           if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
@@ -226,11 +227,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               img.src = url;
             }
+
+            this._slides.push(node);
           }
         }
 
         // Then create the Swiper instance
-        this._slides = slides;
         this.render();
       }.bind(this), 10);
     },
