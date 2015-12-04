@@ -219,7 +219,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
-        wrapper.style = '';
+        wrapper.removeAttribute('style');
 
         for (var i = 0; i < slides.length; i++) {
           if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
