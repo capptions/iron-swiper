@@ -63,12 +63,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="swiper-container" id="swiper">
 
-      <div class="swiper-pagination" id="pagination" hidden="[[!pagination]]"></div>
+      <div class="swiper-pagination" id="pagination" hidden="[[!nav(pagination, nodes)]]"></div>
 
       <div class="swiper-wrapper" id="wrapper"></div>
 
-      <div class="swiper-button-prev" id="prev" hidden="[[!navigationButtons]]"></div>
-      <div class="swiper-button-next" id="next" hidden="[[!navigationButtons]]"></div>
+      <div class="swiper-button-prev" id="prev" hidden="[[!nav(navigationButtons, nodes)]]"></div>
+      <div class="swiper-button-next" id="next" hidden="[[!nav(navigationButtons, nodes)]]"></div>
 
       <div class="swiper-scrollbar" id="scrollbar" hidden="[[!scrollbar]]"></div>
 
@@ -87,6 +87,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     properties: {
+
+      /**
+       * Internal storage for slide nodes
+       */
+      nodes: {
+        type: Array,
+        value: []
+      },
 
       /**
        * Enable pagination functionality
@@ -171,6 +179,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     },
 
+    nav: function (property, nodes) {
+      return property && nodes && nodes.length && nodes.length > 1;
+    },
+
     getOptions: function () {
       return Object.keys(this.properties).reduce(function (options, key) {
         if (this.$[key]) {
@@ -186,9 +198,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           options[key] = this[key];
         }
 
-        // Disable all sliding stuff for 1 or less slides
-        if (!this._slides || this._slides.length <= 1) {
-          options.prevButton = options.nextButton = options.pagination = options.loop = false;
+        // Disable loop for 1 or less slides
+        if (!this.nodes || this.nodes.length <= 1) {
+          options.loop = false;
         }
 
         return options;
@@ -202,11 +214,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       this._initializer = setTimeout(function () {
         // First clone real nodes into the wrapper
+        var nodes = [];
         var slides = this.querySelectorAll('#slides > *:not(template)');
         var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
-        this._slides = [];
+        wrapper.style = '';
 
         for (var i = 0; i < slides.length; i++) {
           if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
@@ -228,11 +241,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               img.src = url;
             }
 
-            this._slides.push(node);
+            nodes.push(node);
           }
         }
 
         // Then create the Swiper instance
+        this.set('nodes', nodes);
         this.render();
       }.bind(this), 10);
     },
@@ -244,6 +258,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       if (this._swiper) {
+        this.$.prev.classList.remove(this._swiper.params.buttonDisabledClass);
+        this.$.next.classList.remove(this._swiper.params.buttonDisabledClass);
         this._swiper.destroy();
       }
 
