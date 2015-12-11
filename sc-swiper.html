@@ -83,7 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     is: 'sc-swiper',
 
     listeners: {
-      'dom-change': 'initialize'
+      'dom-change': 'attached'
     },
 
     properties: {
@@ -207,7 +207,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }.bind(this), this.options);
     },
 
-    initialize: function () {
+    attached: function () {
       if (this._initializer) {
         clearTimeout(this._initializer);
       }
