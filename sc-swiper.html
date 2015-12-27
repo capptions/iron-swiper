@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <link rel="import" href="../polymer/polymer.html" />
 <link rel="stylesheet" href="../swiper/dist/css/swiper.min.css" />
-<script src="../swiper/dist/js/swiper.min.js"></script>
+<script src="../swiper/dist/js/swiper.js"></script>
 
 <dom-module id="sc-swiper">
   <template id="main">
@@ -185,6 +185,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     getOptions: function () {
       return Object.keys(this.properties).reduce(function (options, key) {
+        if (typeof this.options[key] !== 'undefined') {
+          options[key] = this.options[key];
+        }
+
         if (this.$[key]) {
           if (this[key]) {
             options[key] = this.$[key];
@@ -204,7 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         return options;
-      }.bind(this), this.options);
+      }.bind(this), {});
     },
 
     attached: function () {
