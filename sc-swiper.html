@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div id="slides">
+    <div id="slides" hidden>
       <content></content>
     </div>
 
@@ -219,34 +219,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._initializer = setTimeout(function () {
         // First clone real nodes into the wrapper
         var nodes = [];
-        var slides = this.querySelectorAll('#slides > *:not(template)');
+        var slides = this.querySelectorAll('#slides > *:not(template):not(.swiper-slide)');
         var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
         wrapper.removeAttribute('style');
 
         for (var i = 0; i < slides.length; i++) {
-          if (slides[i].tagName && !/template/i.test(slides[i].tagName)) {
-            slides[i].classList.add('swiper-slide');
+          slides[i].classList.add('swiper-slide');
 
-            var node = wrapper.appendChild(slides[i]);
-            node.removeEventListener('tap', this.view);
-            node.addEventListener('tap', this.view);
+          var node = wrapper.appendChild(slides[i].cloneNode(true));
+          node.removeEventListener('tap', this.view);
+          node.addEventListener('tap', this.view);
 
-            var url = node.style.backgroundImage;
-            if (url) {
-              url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
-              var img = new window.Image();
+          var url = node.style.backgroundImage;
+          if (url) {
+            url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
+            var img = new window.Image();
 
-              img.addEventListener('error', function () {
-                this.fire('error');
-              }.bind(this));
+            img.addEventListener('error', function () {
+              this.fire('error');
+            }.bind(this));
 
-              img.src = url;
-            }
-
-            nodes.push(node);
+            img.src = url;
           }
+
+          nodes.push(node);
         }
 
         // Then create the Swiper instance
