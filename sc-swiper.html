@@ -238,7 +238,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var img = new window.Image();
 
             img.addEventListener('error', function () {
-              this.fire('error');
+              this.fire('error', {}, { bubbles: false });
             }.bind(this));
 
             img.src = url;
