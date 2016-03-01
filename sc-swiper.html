@@ -276,13 +276,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return;
       }
 
-      if (window.cordova && window.cordova.InAppBrowser) {
-        var options = 'location=no,hardwareback=yes,EnableViewPortScale=yes';
-        window.cordova.InAppBrowser.open(url, '_blank', options);
+      if (window.viewImage) {
+        return window.viewImage(url);
       }
-      else {
-        window.open(url);
-      }
+
+      return window.open(url);
     }
 
   });
