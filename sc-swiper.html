@@ -8,52 +8,21 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 <link rel="import" href="../polymer/polymer.html" />
-<link rel="stylesheet" href="../swiper/dist/css/swiper.min.css" />
 <script src="../swiper/dist/js/swiper.js"></script>
+<link rel="stylesheet" href="./sc-swiper.css" />
 
 <dom-module id="sc-swiper">
-  <template id="main">
 
+  <link rel="import" type="css" href="./sc-swiper.css" />
+
+  <template id="main">
     <style>
+      :host {
+        display: block;
+      }
+
       #slides {
         display: none;
-      }
-
-      .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
-      }
-      .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
-        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E");
-      }
-
-      .swiper-container {
-        width: 100%;
-        height: 100%;
-      }
-
-      .swiper-wrapper {
-        height: calc(100% - 25px);
-      }
-
-      .swiper-container-horizontal > .swiper-pagination {
-        bottom: 0;
-      }
-
-      ::content .swiper-slide {
-        background-color: #eeeeee;
-        background-position: center center;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-
-      ::content .swiper-slide .caption {
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        top: 8px;
-        font-size: 80%;
-        font-weight: bold;
       }
     </style>
 
@@ -233,7 +202,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._initializer = setTimeout(function () {
         // First clone real nodes into the wrapper
         var nodes = [];
-        var slides = this.querySelectorAll('#slides > *:not(template):not(.swiper-slide)');
+        window.swiper = this;
+        var slides = window.swiper.getEffectiveChildren()
+          .filter(function (node) {
+            return node.tagName &&
+              node.tagName !== 'TEMPLATE' &&
+              !node.classList.contains('swiper-slide');
+          });
+
         var wrapper = this.$.wrapper;
 
         wrapper.innerHTML = '';
@@ -248,8 +224,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
 
           var node = wrapper.appendChild(slides[i].cloneNode(true));
-          node.removeEventListener('tap', this.view);
-          node.addEventListener('tap', this.view);
+          node.removeEventListener('click', this.view);
+          node.addEventListener('click', this.view);
 
           var url = node.style.backgroundImage;
           if (url) {
