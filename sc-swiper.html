@@ -52,7 +52,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     is: 'sc-swiper',
 
     listeners: {
-      'dom-change': 'attached'
+      'dom-change': 'attached',
+      'track': 'preventTrack'
     },
 
     properties: {
@@ -192,6 +193,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           players[i].stop();
         }
       }
+    },
+
+    preventTrack: function (e) {
+      if (!e) {
+        return e;
+      }
+
+      e.cancelBubble = true;
+      e.preventDefault();
     },
 
     attached: function () {
