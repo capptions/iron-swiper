@@ -149,6 +149,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     },
 
+    created: function () {
+      this.view = this.view.bind(this);
+    },
+
     nav: function (property, nodes) {
       return property && nodes && nodes.length && nodes.length > 1;
     },
@@ -277,15 +281,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       e.cancelBubble = true;
       var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
 
-      if (!url) {
-        return;
-      }
-
-      if (window.viewImage) {
-        return window.viewImage(url);
-      }
-
-      return window.open(url);
+      this.fire('view', { url: url });
     }
 
   });
