@@ -174,6 +174,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         else {
           options[key] = this[key];
         }
+        else if (key == 'options') {
+          Object.assign(options, this[key]); // extend the options array with additional settings
+        }
 
         // Disable loop for 1 or less slides
         if (!this.nodes || this.nodes.length <= 1) {
