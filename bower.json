@@ -1,34 +1,31 @@
 {
-  "name": "sc-swiper",
-  "version": "1.0.0",
-  "description": "Polymer 1.0 element that wraps Swiper.js",
-  "authors": [
-    "Safety Changer"
-  ],
+  "name": "iron-swiper",
+  "description": "Polymer 1.0 element that wraps around Swiper.js",
+  "main": "iron-swiper.html",
   "keywords": [
-    "web-components",
     "web-component",
+    "web-components",
+    "web",
+    "component",
+    "components",
+    "custom",
+    "element",
     "polymer",
-    "link",
-    "href",
-    "carousel",
-    "media",
-    "slider",
-    "swipe",
+    "iron",
     "swiper",
-    "animation"
+    "swipe",
+    "mobile"
   ],
-  "main": "sc-swiper.html",
-  "ignore": {},
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/safetychanger/sc-swiper"
-  },
-  "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/safetychanger/sc-swiper",
+  "license": "MIT",
   "dependencies": {
-    "polymer": "latest",
-    "swiper": "latest"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
+    "swiper": "swiper#^3.4.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }

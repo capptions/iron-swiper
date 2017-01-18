@@ -1,18 +1,17 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
-The complete set of authors may be found at http://polymer.github.io/AUTHORS
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
--->
-<link rel="import" href="../polymer/polymer.html" />
 <script src="../swiper/dist/js/swiper.min.js"></script>
 
-<dom-module id="sc-swiper">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 
-  <template id="main">
+<!--
+`iron-swiper`
+Polymer 1.0 element that wraps around Swiper.js
+
+@demo demo/index.html
+-->
+
+<dom-module id="iron-swiper">
+  <template>
     <style>
       :host {
         display: block;
@@ -26,18 +25,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 100%;
         height: 100%;
         margin: 0 auto;
-        @apply(--sc-swiper-container);
+        @apply(--iron-swiper-container);
       }
       .swiper-wrapper {
         height: calc(100% - 25px);
-        @apply(--sc-swiper-wrapper);
+        @apply(--iron-swiper-wrapper);
       }
       .swiper-slide {
         background-color: #eeeeee;
         background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
-        @apply(--sc-swiper-slide);
+        @apply(--iron-swiper-slide);
       }
       .swiper-slide .caption {
         display: inline-block;
@@ -47,12 +46,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         top: 8px;
         font-size: 80%;
         font-weight: bold;
-        @apply(--sc-swiper-caption);
+        @apply(--iron-swiper-caption);
       }
       .swiper-button-prev,
       .swiper-container-rtl .swiper-button-next {
         background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
-        @apply(--sc-swiper-button-prev);
+        @apply(--iron-swiper-button-prev);
       }
       .swiper-button-prev.swiper-button-black,
       .swiper-container-rtl .swiper-button-next.swiper-button-black {
@@ -65,7 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .swiper-button-next,
       .swiper-container-rtl .swiper-button-prev {
         background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
-        @apply(--sc-swiper-button-next);
+        @apply(--iron-swiper-button-next);
       }
       .swiper-button-next.swiper-button-black,
       .swiper-container-rtl .swiper-button-prev.swiper-button-black {
@@ -88,11 +87,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .swiper-pagination {
-        @apply(--sc-swiper-pagination);
+        @apply(--iron-swiper-pagination);
       }
 
       .swiper-scrollbar {
-        @apply(--sc-swiper-scrollbar);
+        @apply(--iron-swiper-scrollbar);
       }
     </style>
 
@@ -115,272 +114,268 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </div>
   </template>
+
+  <script>
+    Polymer({
+      is: 'iron-swiper',
+
+      listeners: {
+        'dom-change': 'attached',
+        'track': 'preventTrack'
+      },
+
+      properties: {
+
+        /**
+         * Internal storage for slide nodes
+         */
+        nodes: {
+          type: Array,
+          value: []
+        },
+
+        /**
+         * Enable pagination functionality
+         */
+        pagination: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * If true then clicking on pagination button will cause transition to appropriate slide
+         */
+        paginationClickable: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Enable navigation buttons
+         */
+        navigationButtons: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Enable scrollbar
+         */
+        scrollbar: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Initial slide to be shown
+         */
+        initialSlide: {
+          type: Boolean,
+          value: 0
+        },
+
+        /**
+         * Enable ARIA
+         */
+        a11y: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Enable continuous loop mode
+         */
+        loop: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Number of slides per view (slides visible at the same time on slider's container).
+         */
+        slidesPerView: {
+          type: String,
+          value: '1'
+        },
+
+        /**
+         * Enable keyboard control
+         */
+        keyboardControl: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Other Swiper options
+         */
+        options: {
+          type: Object,
+          value: {
+          }
+        }
+
+      },
+
+      created: function () {
+        this.view = this.view.bind(this);
+      },
+
+      nav: function (property, nodes) {
+        return property && nodes && nodes.length && nodes.length > 1;
+      },
+
+      getOptions: function () {
+        return Object.keys(this.properties).reduce(function (options, key) {
+          if (this.$[key]) {
+            if (this[key]) {
+              options[key] = this.$[key];
+            }
+          }
+          else if (key === 'navigationButtons') {
+            options.prevButton = this.$.prev;
+            options.nextButton = this.$.next;
+          }
+          else if (key === 'options') {
+            Object.assign(options, this[key]);
+          }
+          else {
+            options[key] = this[key];
+          }
+
+          // Disable loop for 1 or less slides
+          if (!this.nodes || this.nodes.length <= 1) {
+            options.loop = false;
+          }
+
+          return options;
+        }.bind(this), {
+          onSlideChangeStart: this.stopPlayers.bind(this)
+        });
+      },
+
+      stopPlayers: function () {
+        var players = this.querySelectorAll('video, audio');
+        for (var i = 0; i < players.length; i++) {
+          if (players[i].pause) {
+            players[i].pause();
+          }
+          else if (players[i].stop) {
+            players[i].stop();
+          }
+        }
+      },
+
+      preventTrack: function (e) {
+        if (!e) {
+          return e;
+        }
+
+        e.cancelBubble = true;
+        e.preventDefault();
+      },
+
+      attached: function () {
+        if (this._initializer) {
+          clearTimeout(this._initializer);
+        }
+
+        this._initializer = setTimeout(function () {
+          // First clone real nodes into the wrapper
+          var nodes = [];
+          window.swiper = this;
+          var slides = window.swiper.getEffectiveChildren()
+            .filter(function (node) {
+              return node.tagName &&
+                node.tagName !== 'TEMPLATE' &&
+                !node.classList.contains('swiper-slide');
+            });
+
+          var wrapper = this.$.wrapper;
+
+          wrapper.innerHTML = '';
+          wrapper.removeAttribute('style');
+
+          for (var i = 0; i < slides.length; i++) {
+            slides[i].classList.add('swiper-slide');
+
+            // Otherwise IE controls don't work
+            if ('ActiveXObject' in window && /video|audio/i.test(slides[i].tagName.toLowerCase())) {
+              slides[i].classList.add('swiper-no-swiping');
+            }
+
+            var node = wrapper.appendChild(slides[i].cloneNode(true));
+            node.removeEventListener('click', this.view);
+            node.addEventListener('click', this.view);
+
+            var url = node.style.backgroundImage;
+            if (url) {
+              url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
+              var img = new window.Image();
+
+              img.addEventListener('error', function () {
+                this.fire('error', {}, { bubbles: false });
+              }.bind(this));
+
+              img.src = url;
+            }
+
+            nodes.push(node);
+          }
+
+          // Then create the Swiper instance
+          this.set('nodes', nodes);
+          this.render();
+        }.bind(this), 10);
+      },
+
+      render: function () {
+        if (!this._cssReady) {
+          return this._renderWhenReady = true;
+        }
+
+        // TODO: figure out a nicer way for this crap...
+        if (!this.$.wrapper.clientHeight) {
+          return setTimeout(this.render.bind(this), 50);
+        }
+
+        if (this._swiper) {
+          this.$.prev.classList.remove(this._swiper.params.buttonDisabledClass);
+          this.$.next.classList.remove(this._swiper.params.buttonDisabledClass);
+          this._swiper.destroy();
+        }
+
+        this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
+      },
+
+      view: function (e) {
+        e.cancelBubble = true;
+        var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
+
+        this.fire('view', { url: url });
+      },
+
+      _setCSS: function (e) {
+        var css = e && e.currentTarget && e.currentTarget.lastResponse;
+
+        if (!css) {
+          return;
+        }
+
+        var style = document.createElement('style');
+        style.innerHTML = css;
+        Polymer.dom(this.root).insertBefore(style, this.$$('style'));
+
+        this._cssReadyCount = this._cssReadyCount || 0;
+        this._cssReadyCount += 1;
+        this._cssAjax = this._cssAjax || Polymer.dom(this.root).querySelectorAll('iron-ajax[css]');
+        this._cssReady = this._cssReadyCount === this._cssAjax.length;
+
+        if (this._renderWhenReady) {
+          delete this._renderWhenReady;
+          this.render();
+        }
+      }
+    });
+  </script>
 </dom-module>
-
-<script>
-(function () {
-
-  window.Polymer({
-    is: 'sc-swiper',
-
-    listeners: {
-      'dom-change': 'attached',
-      'track': 'preventTrack'
-    },
-
-    properties: {
-
-      /**
-       * Internal storage for slide nodes
-       */
-      nodes: {
-        type: Array,
-        value: []
-      },
-
-      /**
-       * Enable pagination functionality
-       */
-      pagination: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * If true then clicking on pagination button will cause transition to appropriate slide
-       */
-      paginationClickable: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable navigation buttons
-       */
-      navigationButtons: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable scrollbar
-       */
-      scrollbar: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Initial slide to be shown
-       */
-      initialSlide: {
-        type: Boolean,
-        value: 0
-      },
-
-      /**
-       * Enable ARIA
-       */
-      a11y: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable continuous loop mode
-       */
-      loop: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Number of slides per view (slides visible at the same time on slider's container).
-       */
-      slidesPerView: {
-        type: String,
-        value: '1'
-      },
-
-      /**
-       * Enable keyboard control
-       */
-      keyboardControl: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Other Swiper options
-       */
-      options: {
-        type: Object,
-        value: {
-        }
-      }
-
-    },
-
-    created: function () {
-      this.view = this.view.bind(this);
-    },
-
-    nav: function (property, nodes) {
-      return property && nodes && nodes.length && nodes.length > 1;
-    },
-
-    getOptions: function () {
-      return Object.keys(this.properties).reduce(function (options, key) {
-        if (this.$[key]) {
-          if (this[key]) {
-            options[key] = this.$[key];
-          }
-        }
-        else if (key === 'navigationButtons') {
-          options.prevButton = this.$.prev;
-          options.nextButton = this.$.next;
-        }
-        else if (key === 'options') {
-          Object.assign(options, this[key]);
-        }
-        else {
-          options[key] = this[key];
-        }
-
-        // Disable loop for 1 or less slides
-        if (!this.nodes || this.nodes.length <= 1) {
-          options.loop = false;
-        }
-
-        return options;
-      }.bind(this), {
-        onSlideChangeStart: this.stopPlayers.bind(this)
-      });
-    },
-
-    stopPlayers: function () {
-      var players = this.querySelectorAll('video, audio');
-      for (var i = 0; i < players.length; i++) {
-        if (players[i].pause) {
-          players[i].pause();
-        }
-        else if (players[i].stop) {
-          players[i].stop();
-        }
-      }
-    },
-
-    preventTrack: function (e) {
-      if (!e) {
-        return e;
-      }
-
-      e.cancelBubble = true;
-      e.preventDefault();
-    },
-
-    attached: function () {
-      if (this._initializer) {
-        clearTimeout(this._initializer);
-      }
-
-      this._initializer = setTimeout(function () {
-        // First clone real nodes into the wrapper
-        var nodes = [];
-        window.swiper = this;
-        var slides = window.swiper.getEffectiveChildren()
-          .filter(function (node) {
-            return node.tagName &&
-              node.tagName !== 'TEMPLATE' &&
-              !node.classList.contains('swiper-slide');
-          });
-
-        var wrapper = this.$.wrapper;
-
-        wrapper.innerHTML = '';
-        wrapper.removeAttribute('style');
-
-        for (var i = 0; i < slides.length; i++) {
-          slides[i].classList.add('swiper-slide');
-
-          // Otherwise IE controls don't work
-          if ('ActiveXObject' in window && /video|audio/i.test(slides[i].tagName.toLowerCase())) {
-            slides[i].classList.add('swiper-no-swiping');
-          }
-
-          var node = wrapper.appendChild(slides[i].cloneNode(true));
-          node.removeEventListener('click', this.view);
-          node.addEventListener('click', this.view);
-
-          var url = node.style.backgroundImage;
-          if (url) {
-            url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
-            var img = new window.Image();
-
-            img.addEventListener('error', function () {
-              this.fire('error', {}, { bubbles: false });
-            }.bind(this));
-
-            img.src = url;
-          }
-
-          nodes.push(node);
-        }
-
-        // Then create the Swiper instance
-        this.set('nodes', nodes);
-        this.render();
-      }.bind(this), 10);
-    },
-
-    render: function () {
-      if (!this._cssReady) {
-        return this._renderWhenReady = true;
-      }
-
-      // TODO: figure out a nicer way for this crap...
-      if (!this.$.wrapper.clientHeight) {
-        return setTimeout(this.render.bind(this), 50);
-      }
-
-      if (this._swiper) {
-        this.$.prev.classList.remove(this._swiper.params.buttonDisabledClass);
-        this.$.next.classList.remove(this._swiper.params.buttonDisabledClass);
-        this._swiper.destroy();
-      }
-
-      this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
-    },
-
-    view: function (e) {
-      e.cancelBubble = true;
-      var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
-
-      this.fire('view', { url: url });
-    },
-
-    _setCSS: function (e) {
-      var css = e && e.currentTarget && e.currentTarget.lastResponse;
-
-      if (!css) {
-        return;
-      }
-
-      var style = document.createElement('style');
-      style.innerHTML = css;
-      Polymer.dom(this.root).insertBefore(style, this.$.style);
-
-      this._cssReadyCount = this._cssReadyCount || 0;
-      this._cssReadyCount += 1;
-      this._cssAjax = this._cssAjax || Polymer.dom(this.root).querySelectorAll('iron-ajax[css]');
-      this._cssReady = this._cssReadyCount === this._cssAjax.length;
-
-      if (this._renderWhenReady) {
-        delete this._renderWhenReady;
-        this.render();
-      }
-    }
-  });
-
-})();
-</script>
