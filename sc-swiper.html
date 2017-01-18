@@ -8,12 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 <link rel="import" href="../polymer/polymer.html" />
-<script src="../swiper/dist/js/swiper.js"></script>
-<link rel="stylesheet" href="./sc-swiper.css" />
+<script src="../swiper/dist/js/swiper.min.js"></script>
 
 <dom-module id="sc-swiper">
-
-  <link rel="import" type="css" href="./sc-swiper.css" />
 
   <template id="main">
     <style>
@@ -24,7 +21,82 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       #slides {
         display: none;
       }
+
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        @apply(--sc-swiper-container);
+      }
+      .swiper-wrapper {
+        height: calc(100% - 25px);
+        @apply(--sc-swiper-wrapper);
+      }
+      .swiper-slide {
+        background-color: #eeeeee;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        @apply(--sc-swiper-slide);
+      }
+      .swiper-slide .caption {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 8px;
+        font-size: 80%;
+        font-weight: bold;
+        @apply(--sc-swiper-caption);
+      }
+      .swiper-button-prev,
+      .swiper-container-rtl .swiper-button-next {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
+        @apply(--sc-swiper-button-prev);
+      }
+      .swiper-button-prev.swiper-button-black,
+      .swiper-container-rtl .swiper-button-next.swiper-button-black {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23000000%27%2F%3E%3C%2Fsvg%3E');
+      }
+      .swiper-button-prev.swiper-button-white,
+      .swiper-container-rtl .swiper-button-next.swiper-button-white {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23ffffff%27%2F%3E%3C%2Fsvg%3E');
+      }
+      .swiper-button-next,
+      .swiper-container-rtl .swiper-button-prev {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
+        @apply(--sc-swiper-button-next);
+      }
+      .swiper-button-next.swiper-button-black,
+      .swiper-container-rtl .swiper-button-prev.swiper-button-black {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23000000%27%2F%3E%3C%2Fsvg%3E');
+      }
+      .swiper-button-next.swiper-button-white,
+      .swiper-container-rtl .swiper-button-prev.swiper-button-white {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23ffffff%27%2F%3E%3C%2Fsvg%3E');
+      }
+      .swiper-pagination-fraction,
+      .swiper-pagination-custom,
+      .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 0;
+      }
+      .swiper-lazy-preloader:after {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D%270%200%20120%20120%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%3E%3Cdefs%3E%3Cline%20id%3D%27l%27%20x1%3D%2760%27%20x2%3D%2760%27%20y1%3D%277%27%20y2%3D%2727%27%20stroke%3D%27%236c6c6c%27%20stroke-width%3D%2711%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(30%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(60%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(90%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(120%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(150%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.37%27%20transform%3D%27rotate(180%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.46%27%20transform%3D%27rotate(210%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.56%27%20transform%3D%27rotate(240%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.66%27%20transform%3D%27rotate(270%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.75%27%20transform%3D%27rotate(300%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.85%27%20transform%3D%27rotate(330%2060%2C60)%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+      }
+      .swiper-lazy-preloader-white:after {
+        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D%270%200%20120%20120%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%3E%3Cdefs%3E%3Cline%20id%3D%27l%27%20x1%3D%2760%27%20x2%3D%2760%27%20y1%3D%277%27%20y2%3D%2727%27%20stroke%3D%27%23fff%27%20stroke-width%3D%2711%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(30%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(60%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(90%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(120%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(150%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.37%27%20transform%3D%27rotate(180%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.46%27%20transform%3D%27rotate(210%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.56%27%20transform%3D%27rotate(240%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.66%27%20transform%3D%27rotate(270%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.75%27%20transform%3D%27rotate(300%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.85%27%20transform%3D%27rotate(330%2060%2C60)%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+      }
+
+      .swiper-pagination {
+        @apply(--sc-swiper-pagination);
+      }
+
+      .swiper-scrollbar {
+        @apply(--sc-swiper-scrollbar);
+      }
     </style>
+
+    <iron-ajax css auto url="../swiper/dist/css/swiper.min.css" handle-as="text" on-response="_setCSS"></iron-ajax>
 
     <div id="slides" hidden>
       <content></content>
@@ -262,6 +334,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     render: function () {
+      if (!this._cssReady) {
+        return this._renderWhenReady = true;
+      }
+
       // TODO: figure out a nicer way for this crap...
       if (!this.$.wrapper.clientHeight) {
         return setTimeout(this.render.bind(this), 50);
@@ -281,8 +357,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
 
       this.fire('view', { url: url });
-    }
+    },
 
+    _setCSS: function (e) {
+      var css = e && e.currentTarget && e.currentTarget.lastResponse;
+
+      if (!css) {
+        return;
+      }
+
+      var style = document.createElement('style');
+      style.innerHTML = css;
+      Polymer.dom(this.root).insertBefore(style, this.$.style);
+
+      this._cssReadyCount = this._cssReadyCount || 0;
+      this._cssReadyCount += 1;
+      this._cssAjax = this._cssAjax || Polymer.dom(this.root).querySelectorAll('iron-ajax[css]');
+      this._cssReady = this._cssReadyCount === this._cssAjax.length;
+
+      if (this._renderWhenReady) {
+        delete this._renderWhenReady;
+        this.render();
+      }
+    }
   });
 
 })();
