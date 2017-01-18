@@ -159,10 +159,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     getOptions: function () {
       return Object.keys(this.properties).reduce(function (options, key) {
-        if (typeof this.options[key] !== 'undefined') {
-          options[key] = this.options[key];
-        }
-
         if (this.$[key]) {
           if (this[key]) {
             options[key] = this.$[key];
@@ -172,7 +168,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           options.prevButton = this.$.prev;
           options.nextButton = this.$.next;
         }
-        else if (key !== 'options') {
+        else if (key === 'options') {
+          Object.assign(options, this[key]);
+        }
+        else {
           options[key] = this[key];
         }
 
