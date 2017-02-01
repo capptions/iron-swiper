@@ -1,7 +1,6 @@
 <script src="../swiper/dist/js/swiper.min.js"></script>
 
 <link rel="import" href="../polymer/polymer.html" />
-<link rel="import" href="../iron-ajax/iron-ajax.html">
 
 <!--
 `iron-swiper`
@@ -11,6 +10,8 @@ Polymer 1.0 element that wraps around Swiper.js
 -->
 
 <dom-module id="iron-swiper">
+  <link rel="import" type="css" href="../swiper/dist/css/swiper.min.css">
+
   <template>
     <style>
       :host {
@@ -94,8 +95,6 @@ Polymer 1.0 element that wraps around Swiper.js
         @apply(--iron-swiper-scrollbar);
       }
     </style>
-
-    <iron-ajax css auto url="../swiper/dist/css/swiper.min.css" handle-as="text" on-response="_setCSS"></iron-ajax>
 
     <div id="slides" hidden>
       <content></content>
@@ -330,9 +329,7 @@ Polymer 1.0 element that wraps around Swiper.js
       },
 
       render: function () {
-        if (!this._cssReady) {
-          return this._renderWhenReady = true;
-        }
+        this.scopeSubtree(this.$.wrapper, true);
 
         // TODO: figure out a nicer way for this crap...
         if (!this.$.wrapper.clientHeight) {
@@ -353,28 +350,6 @@ Polymer 1.0 element that wraps around Swiper.js
         var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
 
         this.fire('view', { url: url });
-      },
-
-      _setCSS: function (e) {
-        var css = e && e.currentTarget && e.currentTarget.lastResponse;
-
-        if (!css) {
-          return;
-        }
-
-        var style = document.createElement('style');
-        style.innerHTML = css;
-        Polymer.dom(this.root).insertBefore(style, this.$$('style'));
-
-        this._cssReadyCount = this._cssReadyCount || 0;
-        this._cssReadyCount += 1;
-        this._cssAjax = this._cssAjax || Polymer.dom(this.root).querySelectorAll('iron-ajax[css]');
-        this._cssReady = this._cssReadyCount === this._cssAjax.length;
-
-        if (this._renderWhenReady) {
-          delete this._renderWhenReady;
-          this.render();
-        }
       }
     });
   </script>

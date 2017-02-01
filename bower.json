@@ -19,7 +19,6 @@
   "license": "MIT",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
     "swiper": "swiper#^3.4.1"
   },
   "devDependencies": {
