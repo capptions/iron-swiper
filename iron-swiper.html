@@ -1,6 +1,7 @@
 <script src="../swiper/dist/js/swiper.min.js"></script>
 
 <link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="icons.html">
 
 <!--
 `iron-swiper`
@@ -49,32 +50,33 @@ Polymer 1.0 element that wraps around Swiper.js
         font-weight: bold;
         @apply(--iron-swiper-caption);
       }
+
+      .swiper-button-prev,
+      .swiper-container-rtl .swiper-button-prev,
+      .swiper-button-prev.swiper-button-black,
+      .swiper-container-rtl .swiper-button-prev.swiper-button-black,
+      .swiper-button-prev.swiper-button-white,
+      .swiper-container-rtl .swiper-button-prev.swiper-button-white,
+      .swiper-button-next,
+      .swiper-container-rtl .swiper-button-next,
+      .swiper-button-next.swiper-button-black,
+      .swiper-container-rtl .swiper-button-next.swiper-button-black,
+      .swiper-button-next.swiper-button-white,
+      .swiper-container-rtl .swiper-button-next.swiper-button-white {
+        background-image: none;
+        width: 50px;
+        height: 50px;
+      }
+
       .swiper-button-prev,
       .swiper-container-rtl .swiper-button-next {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
         @apply(--iron-swiper-button-prev);
-      }
-      .swiper-button-prev.swiper-button-black,
-      .swiper-container-rtl .swiper-button-next.swiper-button-black {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23000000%27%2F%3E%3C%2Fsvg%3E');
-      }
-      .swiper-button-prev.swiper-button-white,
-      .swiper-container-rtl .swiper-button-next.swiper-button-white {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z%27%20fill%3D%27%23ffffff%27%2F%3E%3C%2Fsvg%3E');
       }
       .swiper-button-next,
       .swiper-container-rtl .swiper-button-prev {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23007aff%27%2F%3E%3C%2Fsvg%3E');
         @apply(--iron-swiper-button-next);
       }
-      .swiper-button-next.swiper-button-black,
-      .swiper-container-rtl .swiper-button-prev.swiper-button-black {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23000000%27%2F%3E%3C%2Fsvg%3E');
-      }
-      .swiper-button-next.swiper-button-white,
-      .swiper-container-rtl .swiper-button-prev.swiper-button-white {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23ffffff%27%2F%3E%3C%2Fsvg%3E');
-      }
+
       .swiper-pagination-fraction,
       .swiper-pagination-custom,
       .swiper-container-horizontal > .swiper-pagination-bullets {
@@ -94,6 +96,18 @@ Polymer 1.0 element that wraps around Swiper.js
       .swiper-scrollbar {
         @apply(--iron-swiper-scrollbar);
       }
+
+      .swiper-button-prev,
+      .swiper-container-rtl .swiper-button-next,
+      .swiper-button-next,
+      .swiper-container-rtl .swiper-button-prev {
+        color: var(--iron-swiper-active-color, --secondary-color);
+      }
+
+      .swiper-pagination-bullet-active, .swiper-pagination-progress .swiper-pagination-progressbar
+      .swiper-pagination-bullet-active, .swiper-pagination-progress .swiper-pagination-progressbar {
+        background: var(--iron-swiper-active-color, --secondary-color);
+      }
     </style>
 
     <div id="slides" hidden>
@@ -106,8 +120,8 @@ Polymer 1.0 element that wraps around Swiper.js
 
       <div class="swiper-wrapper" id="wrapper"></div>
 
-      <div class="swiper-button-prev" id="prev" hidden="[[!nav(navigationButtons, nodes)]]"></div>
-      <div class="swiper-button-next" id="next" hidden="[[!nav(navigationButtons, nodes)]]"></div>
+      <iron-icon icon="iron-swiper:arrow-back" class="swiper-button-prev" id="prev" hidden="[[!nav(navigationButtons, nodes)]]"></iron-icon>
+      <iron-icon icon="iron-swiper:arrow-forward" class="swiper-button-next" id="next" hidden="[[!nav(navigationButtons, nodes)]]"></iron-icon>
 
       <div class="swiper-scrollbar" id="scrollbar" hidden="[[!scrollbar]]"></div>
 
@@ -329,8 +343,6 @@ Polymer 1.0 element that wraps around Swiper.js
       },
 
       render: function () {
-        this.scopeSubtree(this.$.wrapper, true);
-
         // TODO: figure out a nicer way for this crap...
         if (!this.$.wrapper.clientHeight) {
           return setTimeout(this.render.bind(this), 50);
@@ -343,6 +355,7 @@ Polymer 1.0 element that wraps around Swiper.js
         }
 
         this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
+        this.scopeSubtree(this.$.swiper);
       },
 
       view: function (e) {
