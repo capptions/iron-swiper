@@ -293,15 +293,12 @@ Polymer 1.0 element that wraps around Swiper.js
       },
 
       attached: function () {
-        if (this._initializer) {
-          clearTimeout(this._initializer);
-        }
+        clearTimeout(this._initializer);
 
         this._initializer = setTimeout(function () {
           // First clone real nodes into the wrapper
           var nodes = [];
-          window.swiper = this;
-          var slides = window.swiper.getEffectiveChildren()
+          var slides = this.getEffectiveChildren()
             .filter(function (node) {
               return node.tagName &&
                 node.tagName !== 'TEMPLATE' &&
@@ -314,14 +311,13 @@ Polymer 1.0 element that wraps around Swiper.js
           wrapper.removeAttribute('style');
 
           for (var i = 0; i < slides.length; i++) {
-            slides[i].classList.add('swiper-slide');
-
             // Otherwise IE controls don't work
             if ('ActiveXObject' in window && /video|audio/i.test(slides[i].tagName.toLowerCase())) {
               slides[i].classList.add('swiper-no-swiping');
             }
 
             var node = wrapper.appendChild(slides[i].cloneNode(true));
+            node.classList.add('swiper-slide');
             node.removeEventListener('click', this.view);
             node.addEventListener('click', this.view);
 
