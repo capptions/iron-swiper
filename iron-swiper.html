@@ -5,7 +5,7 @@
 
 <!--
 `iron-swiper`
-Polymer 1.0 element that wraps around Swiper.js
+Polymer 2.x element that wraps around Swiper.js
 
 @demo demo/index.html
 -->
@@ -15,7 +15,7 @@ Polymer 1.0 element that wraps around Swiper.js
 
   <template>
     <style>
-      :host {
+       :host {
         display: block;
       }
 
@@ -27,18 +27,18 @@ Polymer 1.0 element that wraps around Swiper.js
         width: 100%;
         height: 100%;
         margin: 0 auto;
-        @apply(--iron-swiper-container);
+        @apply --iron-swiper-container;
       }
       .swiper-wrapper {
         height: calc(100% - 25px);
-        @apply(--iron-swiper-wrapper);
+        @apply --iron-swiper-wrapper;
       }
       .swiper-slide {
         background-color: #eeeeee;
         background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
-        @apply(--iron-swiper-slide);
+        @apply --iron-swiper-slide;
       }
       .swiper-slide .caption {
         display: inline-block;
@@ -48,7 +48,7 @@ Polymer 1.0 element that wraps around Swiper.js
         top: 8px;
         font-size: 80%;
         font-weight: bold;
-        @apply(--iron-swiper-caption);
+        @apply --iron-swiper-caption;
       }
 
       .swiper-button-prev,
@@ -70,11 +70,11 @@ Polymer 1.0 element that wraps around Swiper.js
 
       .swiper-button-prev,
       .swiper-container-rtl .swiper-button-next {
-        @apply(--iron-swiper-button-prev);
+        @apply --iron-swiper-button-prev;
       }
       .swiper-button-next,
       .swiper-container-rtl .swiper-button-prev {
-        @apply(--iron-swiper-button-next);
+        @apply --iron-swiper-button-next;
       }
 
       .swiper-pagination-fraction,
@@ -90,11 +90,11 @@ Polymer 1.0 element that wraps around Swiper.js
       }
 
       .swiper-pagination {
-        @apply(--iron-swiper-pagination);
+        @apply --iron-swiper-pagination;
       }
 
       .swiper-scrollbar {
-        @apply(--iron-swiper-scrollbar);
+        @apply --iron-swiper-scrollbar;
       }
 
       .swiper-button-prev,
@@ -104,8 +104,9 @@ Polymer 1.0 element that wraps around Swiper.js
         color: var(--iron-swiper-active-color, --secondary-color);
       }
 
-      .swiper-pagination-bullet-active, .swiper-pagination-progress .swiper-pagination-progressbar
-      .swiper-pagination-bullet-active, .swiper-pagination-progress .swiper-pagination-progressbar {
+      .swiper-pagination-bullet-active,
+      .swiper-pagination-progress .swiper-pagination-progressbar .swiper-pagination-bullet-active,
+      .swiper-pagination-progress .swiper-pagination-progressbar {
         background: var(--iron-swiper-active-color, --secondary-color);
       }
 
@@ -115,7 +116,7 @@ Polymer 1.0 element that wraps around Swiper.js
     </style>
 
     <div id="slides" hidden>
-      <content></content>
+      <slot></slot>
     </div>
 
     <div class="swiper-container" id="swiper">
@@ -133,117 +134,128 @@ Polymer 1.0 element that wraps around Swiper.js
   </template>
 
   <script>
-    Polymer({
-      is: 'iron-swiper',
-
-      listeners: {
-        'dom-change': 'attached',
-        'track': 'preventTrack'
-      },
-
-      properties: {
-
-        /**
-         * Internal storage for slide nodes
+    /**
+         * @polymer
+         * @extends HTMLElement
          */
-        nodes: {
-          type: Array,
-          value: []
-        },
+    class IronSwiper extends Polymer.Element {
+      static get is() {
+        return 'iron-swiper';
+      }
 
-        /**
-         * Enable pagination functionality
-         */
-        pagination: {
-          type: Boolean,
-          value: false
-        },
+      static get properties() {
+        return {
 
-        /**
-         * If true then clicking on pagination button will cause transition to appropriate slide
-         */
-        paginationClickable: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * Internal storage for slide nodes
+           */
+          nodes: {
+            type: Array,
+            value: []
+          },
 
-        /**
-         * Enable navigation buttons
-         */
-        navigationButtons: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * Enable pagination functionality
+           */
+          pagination: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Enable scrollbar
-         */
-        scrollbar: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * If true then clicking on pagination button will cause transition to appropriate slide
+           */
+          paginationClickable: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Initial slide to be shown
-         */
-        initialSlide: {
-          type: Boolean,
-          value: 0
-        },
+          /**
+           * Enable navigation buttons
+           */
+          navigationButtons: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Enable ARIA
-         */
-        a11y: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * Enable scrollbar
+           */
+          scrollbar: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Enable continuous loop mode
-         */
-        loop: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * Initial slide to be shown
+           */
+          initialSlide: {
+            type: Boolean,
+            value: 0
+          },
 
-        /**
-         * Number of slides per view (slides visible at the same time on slider's container).
-         */
-        slidesPerView: {
-          type: String,
-          value: '1'
-        },
+          /**
+           * Enable ARIA
+           */
+          a11y: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Enable keyboard control
-         */
-        keyboardControl: {
-          type: Boolean,
-          value: false
-        },
+          /**
+           * Enable continuous loop mode
+           */
+          loop: {
+            type: Boolean,
+            value: false
+          },
 
-        /**
-         * Other Swiper options
-         */
-        options: {
-          type: Object,
-          value: {
+          /**
+           * Number of slides per view (slides visible at the same time on slider's container).
+           */
+          slidesPerView: {
+            type: String,
+            value: '1'
+          },
+
+          /**
+           * Enable keyboard control
+           */
+          keyboardControl: {
+            type: Boolean,
+            value: false
+          },
+
+          /**
+           * Other Swiper options
+           */
+          options: {
+            type: Object,
+            value: {}
           }
-        }
+        };
+      }
 
-      },
+      ready() {
+        super.ready();
 
-      created: function () {
+        this.init();
+
+        this.addEventListener('dom-change', this.init);
+        this.addEventListener('track', this.preventTrack);
+      }
+
+      constructor() {
+        super();
         this.view = this.view.bind(this);
-      },
+      }
 
-      nav: function (property, nodes) {
+      nav(property, nodes) {
         return property && nodes && nodes.length && nodes.length > 1;
-      },
+      }
 
-      getOptions: function () {
-        return Object.keys(this.properties).reduce(function (options, key) {
+      getOptions() {
+        return Object.keys(IronSwiper.properties).reduce(function (options, key) {
           if (this.$[key]) {
             if (this[key]) {
               options[key] = this.$[key];
@@ -267,11 +279,11 @@ Polymer 1.0 element that wraps around Swiper.js
 
           return options;
         }.bind(this), {
-          onSlideChangeStart: this.stopPlayers.bind(this)
-        });
-      },
+            onSlideChangeStart: this.stopPlayers.bind(this)
+          });
+      }
 
-      stopPlayers: function () {
+      stopPlayers() {
         var players = this.querySelectorAll('video, audio');
         for (var i = 0; i < players.length; i++) {
           if (players[i].pause) {
@@ -281,25 +293,26 @@ Polymer 1.0 element that wraps around Swiper.js
             players[i].stop();
           }
         }
-      },
+      }
 
-      preventTrack: function (e) {
+      preventTrack(e) {
         if (!e) {
           return e;
         }
 
         e.cancelBubble = true;
         e.preventDefault();
-      },
+      }
 
-      attached: function () {
+      init() {
         clearTimeout(this._initializer);
-
         this._initializer = setTimeout(function () {
           // First clone real nodes into the wrapper
           var nodes = [];
-          var slides = this.getEffectiveChildren()
-            .filter(function (node) {
+
+          let slides = Polymer.FlattenedNodesObserver.getFlattenedNodes(this)
+            .filter(
+            function (node) {
               return node.tagName &&
                 node.tagName !== 'TEMPLATE' &&
                 !node.classList.contains('swiper-slide');
@@ -327,11 +340,17 @@ Polymer 1.0 element that wraps around Swiper.js
               var img = new window.Image();
 
               img.addEventListener('error', function () {
-                this.fire('error', { img: img, url: url }, { bubbles: false });
+                this.dispatchEvent(new CustomEvent('error', {
+                  composed: true,
+                  detail: {img: img, url: url}
+                }));
               }.bind(this));
 
               img.addEventListener('load', function (e) {
-                this.fire('load', { img: img, url: url }, { bubbles: false });
+                this.dispatchEvent(new CustomEvent('load', {
+                  composed: true,
+                  detail: {img: img, url: url}
+                }));
               }.bind(this));
 
               img.crossOrigin = true;
@@ -345,9 +364,9 @@ Polymer 1.0 element that wraps around Swiper.js
           this.set('nodes', nodes);
           this.render();
         }.bind(this), 10);
-      },
+      }
 
-      render: function () {
+      render() {
         // TODO: figure out a nicer way for this crap...
         if (!this.$.wrapper.clientHeight) {
           return setTimeout(this.render.bind(this), 50);
@@ -360,15 +379,15 @@ Polymer 1.0 element that wraps around Swiper.js
         }
 
         this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
-        this.scopeSubtree(this.$.swiper);
-      },
+        // this.scopeSubtree(this.$.swiper); // for polymer 2.x this process should be automatic now. See https://github.com/webcomponents/shadycss/issues/114#issuecomment-321936467
+      }
 
-      view: function (e) {
+      view(e) {
         e.cancelBubble = true;
         var url = e.currentTarget && e.currentTarget.getAttribute('data-url');
-
-        this.fire('view', { url: url });
+        this.dispatchEvent(new CustomEvent('view', {bubbles: true, composed: true, detail: {url: url}}));
       }
-    });
+    }
+    window.customElements.define(IronSwiper.is, IronSwiper);
   </script>
 </dom-module>
