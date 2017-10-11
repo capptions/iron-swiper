@@ -1,5 +1,5 @@
 `<iron-swiper>` is a Polymer 2.x element that wraps around Swiper.js.
-(For Polymer 1.x, use iron-swiper - v1.0.4 or lower.)
+(For Polymer 1.x, use iron-swiper - v1.0.5 or lower.)
 
 ## Demo
 
