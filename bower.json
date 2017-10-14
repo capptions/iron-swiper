@@ -1,6 +1,6 @@
 {
   "name": "iron-swiper",
-  "description": "Polymer 1.0 element that wraps around Swiper.js",
+  "description": "Polymer 2.x element that wraps around Swiper.js",
   "main": "iron-swiper.html",
   "keywords": [
     "web-component",
@@ -18,14 +18,13 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
+    "polymer": "Polymer/polymer#^2.1.1",
     "swiper": "swiper#^3.4.1"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "iron-photo-viewer": "safetychanger/iron-photo-viewer#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "^6.3.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.14"
   }
 }
