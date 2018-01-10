@@ -18,14 +18,26 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "swiper": "swiper#^3.4.1"
+    "polymer": "^2.3.1",
+    "swiper": "^4.0.7"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.19",
+    "polymer": "^2.3.1",
+    "swiper": "^4.0.7",
+    "iron-component-page": "^3.0.1",
+    "iron-doc-viewer": "^3.0.0",
+    "iron-location": "1 - 2",
+    "iron-demo-helpers": "^2.0.0",
+    "mocha": "^3.1.2",
+    "test-fixture": "^3.0.0",
+    "web-component-tester": "^6.4.1"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-demo-helpers": "^2.0.0",
+    "iron-component-page": "^3.0.1",
     "iron-photo-viewer": "safetychanger/iron-photo-viewer#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "web-component-tester": "^6.4.1",
+    "webcomponentsjs": "^1.0.21"
   }
 }

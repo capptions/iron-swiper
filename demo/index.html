@@ -13,15 +13,17 @@
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../iron-swiper.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic iron-swiper demo</h3>
       <demo-snippet>
         <template>
-          <iron-swiper loop a11y keyboard-control pagination pagination-clickable>
+          <iron-swiper loop a11y keyboard pagination pagination-clickable>
             <img src="./sample.jpg">
             <img src="./sample.jpg">
             <img src="./sample.jpg">
