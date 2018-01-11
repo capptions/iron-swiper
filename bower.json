@@ -1,6 +1,6 @@
 {
   "name": "iron-swiper",
-  "description": "Polymer 1.0 element that wraps around Swiper.js",
+  "description": "Polymer 2.x element that wraps around Swiper.js",
   "main": "iron-swiper.html",
   "keywords": [
     "web-component",
