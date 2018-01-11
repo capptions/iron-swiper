@@ -1,0 +1,759 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "`iron-swiper`\nPolymer 2.x element that wraps around Swiper.js",
+      "summary": "",
+      "path": "iron-swiper.html",
+      "properties": [
+        {
+          "name": "_nodes",
+          "type": "Array",
+          "description": "Internal storage for slide nodes",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 153,
+              "column": 10
+            },
+            "end": {
+              "line": 156,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "selected",
+          "type": "string",
+          "description": "Gets or sets the selected slide by index",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 161,
+              "column": 10
+            },
+            "end": {
+              "line": 166,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"setSelected\""
+            }
+          },
+          "defaultValue": "0"
+        },
+        {
+          "name": "slideToClickedSlide",
+          "type": "boolean",
+          "description": "Set to true and click on any slide will produce transition to that slide",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 171,
+              "column": 10
+            },
+            "end": {
+              "line": 175,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "pagination",
+          "type": "boolean",
+          "description": "Enable pagination functionality",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 180,
+              "column": 10
+            },
+            "end": {
+              "line": 183,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "paginationClickable",
+          "type": "boolean",
+          "description": "If true then clicking on pagination button will cause transition to appropriate slide",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 188,
+              "column": 10
+            },
+            "end": {
+              "line": 191,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "navigationButtons",
+          "type": "boolean",
+          "description": "Enable navigation buttons",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 196,
+              "column": 10
+            },
+            "end": {
+              "line": 199,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "nextIcon",
+          "type": "string",
+          "description": "If `navigationButtons` then the next button icon can be set",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 204,
+              "column": 10
+            },
+            "end": {
+              "line": 207,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"iron-swiper:arrow-forward\""
+        },
+        {
+          "name": "prevIcon",
+          "type": "string",
+          "description": "If `navigationButtons` then the prev button icon can be set",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 211,
+              "column": 10
+            },
+            "end": {
+              "line": 214,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"iron-swiper:arrow-back\""
+        },
+        {
+          "name": "scrollbar",
+          "type": "boolean",
+          "description": "Enable scrollbar",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 219,
+              "column": 10
+            },
+            "end": {
+              "line": 222,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "initialSlide",
+          "type": "boolean",
+          "description": "Initial slide to be shown",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 227,
+              "column": 10
+            },
+            "end": {
+              "line": 230,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "0"
+        },
+        {
+          "name": "a11y",
+          "type": "boolean",
+          "description": "Enable ARIA",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 235,
+              "column": 10
+            },
+            "end": {
+              "line": 238,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "description": "Enable continuous loop mode",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 243,
+              "column": 10
+            },
+            "end": {
+              "line": 246,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "keyboard",
+          "type": "boolean",
+          "description": "Enable keyboard control",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 10
+            },
+            "end": {
+              "line": 254,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "options",
+          "type": "Object",
+          "description": "Other Swiper options",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 259,
+              "column": 10
+            },
+            "end": {
+              "line": 262,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "{}"
+        }
+      ],
+      "methods": [
+        {
+          "name": "ready",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 266,
+              "column": 6
+            },
+            "end": {
+              "line": 273,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "nav",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 281,
+              "column": 6
+            },
+            "end": {
+              "line": 283,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "property"
+            },
+            {
+              "name": "_nodes"
+            }
+          ]
+        },
+        {
+          "name": "getOptions",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 285,
+              "column": 6
+            },
+            "end": {
+              "line": 326,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "stopPlayers",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 328,
+              "column": 6
+            },
+            "end": {
+              "line": 338,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "preventTrack",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 340,
+              "column": 6
+            },
+            "end": {
+              "line": 347,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "init",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 349,
+              "column": 6
+            },
+            "end": {
+              "line": 410,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "render",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 412,
+              "column": 6
+            },
+            "end": {
+              "line": 427,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_nodeClicked",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 429,
+              "column": 6
+            },
+            "end": {
+              "line": 435,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_view",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 437,
+              "column": 6
+            },
+            "end": {
+              "line": 441,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "setSelected",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 443,
+              "column": 6
+            },
+            "end": {
+              "line": 450,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index"
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/index.html",
+          "description": ""
+        },
+        {
+          "url": "demo/selected.html",
+          "description": "Selected attribute usage"
+        },
+        {
+          "url": "demo/all.html",
+          "description": "Kitchen Sink demos"
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 142,
+          "column": 4
+        },
+        "end": {
+          "line": 451,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "IronSwiper",
+      "attributes": [
+        {
+          "name": "selected",
+          "description": "Gets or sets the selected slide by index",
+          "sourceRange": {
+            "start": {
+              "line": 161,
+              "column": 10
+            },
+            "end": {
+              "line": 166,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "slide-to-clicked-slide",
+          "description": "Set to true and click on any slide will produce transition to that slide",
+          "sourceRange": {
+            "start": {
+              "line": 171,
+              "column": 10
+            },
+            "end": {
+              "line": 175,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "pagination",
+          "description": "Enable pagination functionality",
+          "sourceRange": {
+            "start": {
+              "line": 180,
+              "column": 10
+            },
+            "end": {
+              "line": 183,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "pagination-clickable",
+          "description": "If true then clicking on pagination button will cause transition to appropriate slide",
+          "sourceRange": {
+            "start": {
+              "line": 188,
+              "column": 10
+            },
+            "end": {
+              "line": 191,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "navigation-buttons",
+          "description": "Enable navigation buttons",
+          "sourceRange": {
+            "start": {
+              "line": 196,
+              "column": 10
+            },
+            "end": {
+              "line": 199,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "next-icon",
+          "description": "If `navigationButtons` then the next button icon can be set",
+          "sourceRange": {
+            "start": {
+              "line": 204,
+              "column": 10
+            },
+            "end": {
+              "line": 207,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "prev-icon",
+          "description": "If `navigationButtons` then the prev button icon can be set",
+          "sourceRange": {
+            "start": {
+              "line": 211,
+              "column": 10
+            },
+            "end": {
+              "line": 214,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "scrollbar",
+          "description": "Enable scrollbar",
+          "sourceRange": {
+            "start": {
+              "line": 219,
+              "column": 10
+            },
+            "end": {
+              "line": 222,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "initial-slide",
+          "description": "Initial slide to be shown",
+          "sourceRange": {
+            "start": {
+              "line": 227,
+              "column": 10
+            },
+            "end": {
+              "line": 230,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "a11y",
+          "description": "Enable ARIA",
+          "sourceRange": {
+            "start": {
+              "line": 235,
+              "column": 10
+            },
+            "end": {
+              "line": 238,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "loop",
+          "description": "Enable continuous loop mode",
+          "sourceRange": {
+            "start": {
+              "line": 243,
+              "column": 10
+            },
+            "end": {
+              "line": 246,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "keyboard",
+          "description": "Enable keyboard control",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 10
+            },
+            "end": {
+              "line": 254,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "options",
+          "description": "Other Swiper options",
+          "sourceRange": {
+            "start": {
+              "line": 259,
+              "column": 10
+            },
+            "end": {
+              "line": 262,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "Object"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "selected-changed",
+          "description": "Fired when the `selected` property changes.",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [
+        {
+          "description": "",
+          "name": "",
+          "range": {
+            "file": "iron-swiper.html",
+            "start": {
+              "line": 120,
+              "column": 6
+            },
+            "end": {
+              "line": 120,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "tagname": "iron-swiper"
+    }
+  ]
+}
