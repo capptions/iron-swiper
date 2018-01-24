@@ -291,14 +291,18 @@ Polymer 2.x element that wraps around Swiper.js
 //            }
 //          }
           if (key === 'navigationButtons') {
-            options.navigation = {};
+            options.navigation = options.navigation || {};
             options.navigation.prevEl = this.$.prev;
             options.navigation.nextEl = this.$.next;
           }
           else if (key === 'pagination') {
-            options.pagination = {};
+            options.pagination = options.pagination || {};
             options.pagination.el = this.$.pagination;
             options.pagination.type = 'bullets';
+          }
+          else if (key === 'paginationClickable') {
+            options.pagination = options.pagination || {};
+            options.pagination.clickable = this[key];
           }
           else if (key === 'options') {
             Object.assign(options, this[key]);
