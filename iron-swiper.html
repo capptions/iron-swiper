@@ -103,13 +103,13 @@ Polymer 2.x element that wraps around Swiper.js
       .swiper-container-rtl .swiper-button-next,
       .swiper-button-next,
       .swiper-container-rtl .swiper-button-prev {
-        color: var(--iron-swiper-active-color, --secondary-color);
+        color: var(--iron-swiper-active-color, var(--secondary-color));
       }
 
       .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar {
-        background: var(--iron-swiper-active-color, --secondary-color);
+        background: var(--iron-swiper-active-color, var(--secondary-color));
       }
 
       .swiper-button-disabled {
@@ -137,9 +137,9 @@ Polymer 2.x element that wraps around Swiper.js
 
   <script>
     /**
-         * @polymer
-         * @extends HTMLElement
-         */
+     * @polymer
+     * @extends HTMLElement
+     */
     class IronSwiper extends Polymer.Element {
       static get is() {
         return 'iron-swiper';
@@ -163,7 +163,7 @@ Polymer 2.x element that wraps around Swiper.js
             type: String,
             value: 0,
             notify: true,
-            observer: "setSelected"
+            observer: 'setSelected'
           },
 
           /**
@@ -172,7 +172,7 @@ Polymer 2.x element that wraps around Swiper.js
           slideToClickedSlide: {
             type: Boolean,
             value: false,
-//            observer: "_setOptions"
+            // observer: "_setOptions"
           },
 
           /**
@@ -204,14 +204,14 @@ Polymer 2.x element that wraps around Swiper.js
            */
           nextIcon: {
             type: String,
-            value: "iron-swiper:arrow-forward"
+            value: 'iron-swiper:arrow-forward'
           },
           /**
            * If `navigationButtons` then the prev button icon can be set
            */
           prevIcon: {
             type: String,
-            value: "iron-swiper:arrow-back"
+            value: 'iron-swiper:arrow-back'
           },
 
           /**
@@ -259,7 +259,7 @@ Polymer 2.x element that wraps around Swiper.js
            */
           options: {
             type: Object,
-            value: function(){ return {}; }
+            value: function() {return {};}
           }
         };
       }
@@ -284,12 +284,12 @@ Polymer 2.x element that wraps around Swiper.js
       }
 
       getOptions() {
-        return Object.keys(IronSwiper.properties).reduce(function (options, key) {
-//          if (this.$[key]) {
-//            if (this[key]) {
-//              options[key] = this.$[key];
-//            }
-//          }
+        return Object.keys(IronSwiper.properties).reduce(function(options, key) {
+          //          if (this.$[key]) {
+          //            if (this[key]) {
+          //              options[key] = this.$[key];
+          //            }
+          //          }
           if (key === 'navigationButtons') {
             options.navigation = options.navigation || {};
             options.navigation.prevEl = this.$.prev;
@@ -319,7 +319,7 @@ Polymer 2.x element that wraps around Swiper.js
           return options;
         }.bind(this), {
           on: {
-            slideChangeTransitionStart: function(){
+            slideChangeTransitionStart: function() {
               if (this._swiper && this._swiper.realIndex>=0) {
                 this.selected = this._swiper.realIndex;
               }
@@ -327,7 +327,7 @@ Polymer 2.x element that wraps around Swiper.js
             }.bind(this)
           }
 
-          });
+        });
       }
 
       stopPlayers() {
@@ -353,17 +353,17 @@ Polymer 2.x element that wraps around Swiper.js
 
       init() {
         clearTimeout(this._initializer);
-        this._initializer = setTimeout(function () {
+        this._initializer = setTimeout(function() {
           // First clone real nodes into the wrapper
           var _nodes = [];
 
           let slides = Polymer.FlattenedNodesObserver.getFlattenedNodes(this)
             .filter(
-            function (node) {
-              return node.tagName &&
+              function(node) {
+                return node.tagName &&
                 node.tagName !== 'TEMPLATE' &&
                 !node.classList.contains('swiper-slide');
-            });
+              });
 
           var wrapper = this.$.wrapper;
 
@@ -378,23 +378,23 @@ Polymer 2.x element that wraps around Swiper.js
 
             var node = wrapper.appendChild(slides[i].cloneNode(true));
             node.classList.add('swiper-slide');
-            node.setAttribute('index',i.toString());
+            node.setAttribute('index', i.toString());
             node.removeEventListener('click', this._nodeClicked);
             node.addEventListener('click', this._nodeClicked);
 
             var url = node.style.backgroundImage;
             if (url) {
-              url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
+              url = url.replace(/^url\(['"]?([^'")]*).*?$/, '$1');
               var img = new window.Image();
 
-              img.addEventListener('error', function () {
+              img.addEventListener('error', function() {
                 this.dispatchEvent(new CustomEvent('error', {
                   composed: true,
                   detail: {img: img, url: url}
                 }));
               }.bind(this));
 
-              img.addEventListener('load', function (e) {
+              img.addEventListener('load', function(e) {
                 this.dispatchEvent(new CustomEvent('load', {
                   composed: true,
                   detail: {img: img, url: url}
@@ -428,7 +428,6 @@ Polymer 2.x element that wraps around Swiper.js
 
         this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
         // this.scopeSubtree(this.$.swiper); // for polymer 2.x this process should be automatic now. See https://github.com/webcomponents/shadycss/issues/114#issuecomment-321936467
-
       }
 
       _nodeClicked(e) {
@@ -449,8 +448,8 @@ Polymer 2.x element that wraps around Swiper.js
         if (this.selected != index) {
           this.selected=index;
         }
-        if(this._swiper && this._swiper.realIndex != index) {
-          this._swiper.slideTo(index);//,300,false);
+        if (this._swiper && this._swiper.realIndex != index) {
+          this._swiper.slideTo(index);// ,300,false);
         }
       }
     }
