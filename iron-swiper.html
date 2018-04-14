@@ -103,13 +103,13 @@ Polymer 2.x element that wraps around Swiper.js
       .swiper-container-rtl .swiper-button-next,
       .swiper-button-next,
       .swiper-container-rtl .swiper-button-prev {
-        color: var(--iron-swiper-active-color, --secondary-color);
+        color: var(--iron-swiper-active-color, var(--secondary-color));
       }
 
       .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar {
-        background: var(--iron-swiper-active-color, --secondary-color);
+        background: var(--iron-swiper-active-color, var(--secondary-color));
       }
 
       .swiper-button-disabled {
@@ -384,7 +384,7 @@ Polymer 2.x element that wraps around Swiper.js
 
             var url = node.style.backgroundImage;
             if (url) {
-              url = url.replace(/^url\(['"]?([^'"\)]*).*?$/, '$1');
+              url = url.replace(/^url\(['"]?([^'")]*).*?$/, '$1');
               var img = new window.Image();
 
               img.addEventListener('error', function() {
