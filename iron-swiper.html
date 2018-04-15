@@ -42,6 +42,11 @@ Polymer 2.x element that wraps around Swiper.js
         background-repeat: no-repeat;
         @apply --iron-swiper-slide;
       }
+
+      .swiper-slide > * {
+        @apply --iron-swiper-slide-child;
+      }
+
       .swiper-slide .caption {
         display: inline-block;
         width: 100%;
