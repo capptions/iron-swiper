@@ -42,6 +42,27 @@ Polymer 2.x element that wraps around Swiper.js
         background-repeat: no-repeat;
         @apply --iron-swiper-slide;
       }
+
+      .swiper-slide-active {
+        @apply --iron-swiper-slide-active;
+      }
+
+      .swiper-slide-prev {
+        @apply --iron-swiper-slide-prev;
+      }
+
+      .swiper-slide-next {
+        @apply --iron-swiper-slide-next;
+      }
+
+      .swiper-slide > * {
+        @apply --iron-swiper-slide-child;
+      }
+
+      .swiper-slide-active.swiper-slide > * {
+        @apply --iron-swiper-slide-child-active;
+      }
+
       .swiper-slide .caption {
         display: inline-block;
         width: 100%;
@@ -171,8 +192,7 @@ Polymer 2.x element that wraps around Swiper.js
            */
           slideToClickedSlide: {
             type: Boolean,
-            value: false,
-            // observer: "_setOptions"
+            value: false
           },
 
           /**
@@ -285,11 +305,6 @@ Polymer 2.x element that wraps around Swiper.js
 
       getOptions() {
         return Object.keys(IronSwiper.properties).reduce(function(options, key) {
-          //          if (this.$[key]) {
-          //            if (this[key]) {
-          //              options[key] = this.$[key];
-          //            }
-          //          }
           if (key === 'navigationButtons') {
             options.navigation = options.navigation || {};
             options.navigation.prevEl = this.$.prev;
@@ -427,7 +442,6 @@ Polymer 2.x element that wraps around Swiper.js
         }
 
         this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
-        // this.scopeSubtree(this.$.swiper); // for polymer 2.x this process should be automatic now. See https://github.com/webcomponents/shadycss/issues/114#issuecomment-321936467
       }
 
       _nodeClicked(e) {
@@ -449,7 +463,7 @@ Polymer 2.x element that wraps around Swiper.js
           this.selected=index;
         }
         if (this._swiper && this._swiper.realIndex != index) {
-          this._swiper.slideTo(index);// ,300,false);
+          this._swiper.slideTo(index);
         }
       }
     }
