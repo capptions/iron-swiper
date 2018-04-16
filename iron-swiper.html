@@ -359,18 +359,17 @@ Polymer 2.x element that wraps around Swiper.js
         clearTimeout(this._initializer);
         this._initializer = setTimeout(function() {
           // First clone real nodes into the wrapper
-          var _nodes = [];
-
+          const _nodes = [];
+          const excludeTagNames = ['TEMPLATE', 'DOM-REPEAT', 'DOM-IF'];
           let slides = Polymer.FlattenedNodesObserver.getFlattenedNodes(this)
             .filter(
               function(node) {
                 return node.tagName &&
-                node.tagName !== 'TEMPLATE' &&
+                excludeTagNames.indexOf(node.tagName) === -1 &&
                 !node.classList.contains('swiper-slide');
               });
 
-          var wrapper = this.$.wrapper;
-
+          const wrapper = this.$.wrapper;
           wrapper.innerHTML = '';
           wrapper.removeAttribute('style');
 
@@ -432,7 +431,6 @@ Polymer 2.x element that wraps around Swiper.js
         }
 
         this._swiper = new window.Swiper(this.$.swiper, this.getOptions());
-        // this.scopeSubtree(this.$.swiper); // for polymer 2.x this process should be automatic now. See https://github.com/webcomponents/shadycss/issues/114#issuecomment-321936467
       }
 
       _nodeClicked(e) {
