@@ -351,6 +351,10 @@ Polymer 2.x element that wraps around Swiper.js
         e.preventDefault();
       }
 
+      _copyProperties(node1, node2) {
+        Object.keys(node1.constructor.properties).forEach(key => node2[key] = node1[key]);
+      }
+
       init() {
         clearTimeout(this._initializer);
         this._initializer = setTimeout(function() {
@@ -377,6 +381,7 @@ Polymer 2.x element that wraps around Swiper.js
             }
 
             var node = wrapper.appendChild(slides[i].cloneNode(true));
+            this._copyProperties(slides[i], node);
             node.classList.add('swiper-slide');
             node.setAttribute('index', i.toString());
             node.removeEventListener('click', this._nodeClicked);
