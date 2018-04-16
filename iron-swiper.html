@@ -394,7 +394,7 @@ Polymer 2.x element that wraps around Swiper.js
               slides[i].classList.add('swiper-no-swiping');
             }
 
-            var node = wrapper.appendChild(slides[i].cloneNode(true));
+            const node = wrapper.appendChild(slides[i].cloneNode(true));
             this._copyProperties(slides[i], node);
             node.classList.add('swiper-slide');
             node.setAttribute('index', i.toString());
