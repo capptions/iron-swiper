@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>iron-swiper demo</title>
+
+    <script>
+      Polymer = {dom: 'shadow'};
+    </script>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../iron-swiper.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Thumbs Gallery With Two-way Control</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template>
+              <h3>Selected: [[sel]]</h3>
+              <iron-swiper selected="{{sel}}" class="top" space-between="30">
+                <img src="./sample.jpg">
+                <img src="./sample.jpg">
+                <img src="./sample.jpg">
+                <img src="./sample.jpg">
+                <img src="./sample.jpg">
+                <a href="https://google.com"><img src="./sample.jpg"></a>
+              </iron-swiper>
+              <iron-swiper selected="{{sel}}" class="bottom" touch-ratio="0.2" slide-to-clicked-slide centered-slides slides-per-view="auto">
+                <img src="./sample.jpg" style="width: 100px;">
+                <img src="./sample.jpg" style="width: 100px;">
+                <img src="./sample.jpg" style="width: 100px;">
+                <img src="./sample.jpg" style="width: 100px;">
+                <img src="./sample.jpg" style="width: 100px;">
+                <img src="./sample.jpg" style="width: 100px;">
+              </iron-swiper>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

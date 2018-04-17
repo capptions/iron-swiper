@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>iron-photo-viewer demo</title>
+
+    <script>Polymer = { dom: 'shady' };</script>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../iron-photo-viewer.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic iron-photo-viewer demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-photo-viewer src="./sample.jpg"></iron-photo-viewer>
+        </template>
+      </demo-snippet>
+    </div>
+    <script>
+      var demo = document.querySelector('demo-snippet');
+      demo.querySelector('iron-photo-viewer').view(['./sample.jpg', './sample.jpg', './sample.jpg'], 2);
+    </script>
+  </body>
+</html>

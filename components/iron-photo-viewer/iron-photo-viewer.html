@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="../../bower_components/swiper/dist/css/swiper.min.css">
+<style>
+  .swiper-container {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: none;
+    z-index: 200;
+  }
+  .swiper-container.visible {
+    display: block;
+  }
+  .swiper-slide {
+    overflow: hidden;
+  }
+  .swiper-button-close {
+    position: absolute;
+    top: 13px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .swiper-button-close:before {
+    content: '×';
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 24px;
+    color: white;
+    font-size: 36px;
+    font-weight: 200;
+  }
+</style>
+
+<dom-module id="iron-photo-viewer">
+  <template>
+    <style></style>
+  </template>
+
+  <script>
+    Polymer(class {
+      beforeRegister () {
+        this.is = 'iron-photo-viewer';
+        this.properties = {
+          options: {}
+        };
+      }
+
+      get behaviors () {
+        return Polymer.behaviors.get(Polymer.behaviors.default);
+      }
+
+      attached () {
+        this.$.container = document.createElement('div');
+        document.body.appendChild(this.$.container);
+        this.$.container.className = 'swiper-container';
+
+        this.$.wrapper = document.createElement('div');
+        this.$.container.appendChild(this.$.wrapper);
+        this.$.wrapper.className = 'swiper-wrapper';
+
+        this.$.pagination = document.createElement('div');
+        this.$.container.appendChild(this.$.pagination);
+        this.$.pagination.className = 'swiper-pagination swiper-pagination-white';
+
+        ['prev', 'next', 'close'].forEach(button => {
+          this.$[button] = document.createElement('div');
+          this.$.container.appendChild(this.$[button]);
+          this.$[button].className = `swiper-button-${button} swiper-button-white`;
+        });
+
+        this.$.container.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+
+        this.$.close.addEventListener('click', this.close.bind(this));
+      }
+
+      view (images = [], index) {
+        if (!images.length) {
+          return;
+        }
+
+        if (this.$.swiper) {
+          this.$.swiper.destroy();
+        }
+
+        this.$.wrapper.style = '';
+
+        this.$.wrapper.innerHTML = images.map(image => `
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container">
+      <img src="${image}">
+    </div>
+  </div>`).join('');
+
+        this.$.container.classList.add('visible');
+
+        this.$.swiper = new Swiper(this.$.container, {
+          initialSlide: Math.max(index || 0, 0),
+          zoom: true,
+          pagination: this.$.pagination,
+          nextButton: this.$.next,
+          prevButton: this.$.prev
+        });
+      }
+
+      close (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.$.container.classList.remove('visible');
+      }
+    });
+  </script>
+</dom-module>

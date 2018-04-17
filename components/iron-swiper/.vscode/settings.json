@@ -1,0 +1,10 @@
+{
+	"eslint.autoFixOnSave": true,
+	"eslint.validate": [
+		{ "language": "javascript", "autoFix": true },
+		{ "language": "html", "autoFix": true }
+	],
+	"html.format.wrapAttributes": "force-aligned",
+	"editor.tabSize": 4,
+	"editor.useTabStops": true,
+}

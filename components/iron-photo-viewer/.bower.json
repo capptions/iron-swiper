@@ -1,0 +1,42 @@
+{
+  "name": "iron-photo-viewer",
+  "description": "Polymer element for viewing fullscreen photos, based on Swiper.js",
+  "main": "iron-photo-viewer.html",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "web",
+    "component",
+    "components",
+    "custom",
+    "element",
+    "polymer",
+    "iron",
+    "photo",
+    "viewer",
+    "fullscreen",
+    "mobile"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.8.0",
+    "cropperjs": "^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/safetychanger/iron-photo-viewer",
+  "version": "1.0.0",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "9958133dd4306c5cb88df541aad6de3297485aca"
+  },
+  "_source": "https://github.com/safetychanger/iron-photo-viewer.git",
+  "_target": "^1.0.0",
+  "_originalSource": "safetychanger/iron-photo-viewer"
+}

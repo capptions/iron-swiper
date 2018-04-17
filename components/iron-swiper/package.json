@@ -1,0 +1,36 @@
+{
+	"name": "iron-swiper",
+	"version": "2.0.1",
+	"description": "[![Build Status](https://travis-ci.org/safetychanger/iron-swiper.svg?branch=master)](https://travis-ci.org/safetychanger/iron-swiper)",
+	"main": "index.html",
+	"directories": {
+		"test": "test"
+	},
+	"devDependencies": {
+		"eslint": "^4.10.0",
+		"eslint-config-google": "^0.9.1",
+		"eslint-plugin-html": "^3.2.2",
+		"eslint-plugin-mocha": "^4.11.0",
+		"polymer-cli": "^1.5.4"
+	},
+	"scripts": {
+		"start": "polymer serve -o",
+		"postinstall": "polymer install",
+		"lint": "eslint --cache --ext .js,.html . && polymer lint iron-swiper.html",
+		"test": "polymer test"
+	},
+	"iron-swipersitory": {
+		"type": "git",
+		"url": "git+https://github.com/safetychanger/iron-swiper.git"
+	},
+	"keywords": [
+		"polymer",
+		"web-components"
+	],
+	"author": "",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/safetychanger/iron-swiper/issues"
+	},
+	"homepage": "https://github.com/safetychanger/iron-swiper#readme"
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>iron-swiper demo</title>
+
+    <script>
+      Polymer = {dom: 'shadow'};
+    </script>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../iron-swiper.html">
+
+    <link rel="import" href="../icons.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        html {
+          --iron-swiper-slide-background-color: white;
+          --iron-swiper-container: {
+            height: 400px;
+            background-color: grey;
+          }
+
+          --iron-swiper-slide: {
+            text-align: center;
+            font-size: 18px;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+          }
+        }
+        .thumbs {
+          --iron-swiper-container: {
+            height: 200px;
+            background-color: grey;
+          }
+          --iron-swiper-slide: {
+            width: 200px;
+          }
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Default demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-swiper>
+            <div>Slide #1</div>
+            <div>Slide #2</div>
+            <div>Slide #3</div>
+          </iron-swiper>
+        </template>
+      </demo-snippet>
+
+      <h3>Navigation demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-swiper navigation-buttons>
+            <div>Slide #1</div>
+            <div>Slide #2</div>
+            <div>Slide #3</div>
+          </iron-swiper>
+        </template>
+      </demo-snippet>
+
+      <h3>Pagination demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-swiper pagination>
+            <div>Slide #1</div>
+            <div>Slide #2</div>
+            <div>Slide #3</div>
+          </iron-swiper>
+        </template>
+      </demo-snippet>
+
+      <h3>Vertical Slider demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-swiper pagination options='{"direction":"vertical"}'>
+            <div>Slide #1</div>
+            <div>Slide #2</div>
+            <div>Slide #3</div>
+          </iron-swiper>
+        </template>
+      </demo-snippet>
+
+      <h3>Vertical Slider demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-swiper pagination options='{"spaceBetween":30}'>
+            <div>Slide #1</div>
+            <div>Slide #2</div>
+            <div>Slide #3</div>
+          </iron-swiper>
+        </template>
+      </demo-snippet>
+
+      <h3>Thumb Gallery demo</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template>
+              <iron-swiper selected="{{sel}}">
+                <div>Slide #1</div>
+                <div>Slide #2</div>
+                <div>Slide #3</div>
+              </iron-swiper>
+              <iron-swiper class="thumbs" selected="{{sel}}" slide-to-clicked-slide slides-per-view="auto" options='{"slidesPerView":"auto", "centered-slides":true, "spaceBetween":10,"touchRatio":0.2}'>
+                <div>Slide #1</div>
+                <div>Slide #2</div>
+                <div>Slide #3</div>
+              </iron-swiper>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>
