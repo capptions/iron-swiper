@@ -1,36 +1,59 @@
 {
-	"name": "iron-swiper",
-	"version": "2.0.1",
-	"description": "[![Build Status](https://travis-ci.org/safetychanger/iron-swiper.svg?branch=master)](https://travis-ci.org/safetychanger/iron-swiper)",
-	"main": "index.html",
-	"directories": {
-		"test": "test"
-	},
-	"devDependencies": {
-		"eslint": "^4.10.0",
-		"eslint-config-google": "^0.9.1",
-		"eslint-plugin-html": "^3.2.2",
-		"eslint-plugin-mocha": "^4.11.0",
-		"polymer-cli": "^1.5.4"
-	},
-	"scripts": {
-		"start": "polymer serve -o",
-		"postinstall": "polymer install",
-		"lint": "eslint --cache --ext .js,.html . && polymer lint iron-swiper.html",
-		"test": "polymer test"
-	},
-	"iron-swipersitory": {
-		"type": "git",
-		"url": "git+https://github.com/safetychanger/iron-swiper.git"
-	},
-	"keywords": [
-		"polymer",
-		"web-components"
-	],
-	"author": "",
-	"license": "Apache-2.0",
-	"bugs": {
-		"url": "https://github.com/safetychanger/iron-swiper/issues"
-	},
-	"homepage": "https://github.com/safetychanger/iron-swiper#readme"
+  "_from": "iron-swiper-3",
+  "_id": "iron-swiper-3@2.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-8LTf6sy35hFrtCNuO1hTGD73M0hmnw09AAI4LprA062C98z+qmOWymvCak24yamsmTBqsWWYVBUPN9G8DUfX2A==",
+  "_location": "/iron-swiper-3",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "iron-swiper-3",
+    "name": "iron-swiper-3",
+    "escapedName": "iron-swiper-3",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/iron-swiper-3/-/iron-swiper-3-2.0.1.tgz",
+  "_shasum": "ae0f35241becc185b86a8ae2dcf4c123603264fd",
+  "_spec": "iron-swiper-3",
+  "_where": "/mnt/c/wamp64/www/biness",
+  "bundleDependencies": false,
+  "dependencies": {
+    "@polymer/iron-icon": "^3.0.0-pre.1",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0",
+    "swiper": "^4.2.6"
+  },
+  "deprecated": false,
+  "description": "Polymer 3.x element that wraps around Swiper.js",
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  },
+  "flat": true,
+  "keywords": [
+    "web-component",
+    "web-components",
+    "web",
+    "component",
+    "components",
+    "custom",
+    "element",
+    "polymer",
+    "iron",
+    "swiper",
+    "swipe",
+    "mobile"
+  ],
+  "license": "MIT",
+  "main": "iron-swiper.html",
+  "name": "iron-swiper-3",
+  "version": "2.0.1"
 }
