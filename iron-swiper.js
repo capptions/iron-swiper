@@ -1,16 +1,147 @@
 import './icons.js';
+import './swiper-style.js';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import Swiper  from 'swiper';
 
-const $_documentContainer = document.createElement('div');
-$_documentContainer.setAttribute('style', 'display: none;');
+/**
+ * @polymer
+ * @extends HTMLElement
+ */
+/**
+`iron-swiper`
+Polymer 2.x element that wraps around Swiper.js
 
-$_documentContainer.innerHTML = `<dom-module id="iron-swiper">
-  
+@demo demo/index.html
+@demo demo/selected.html Selected attribute usage
+@demo demo/all.html Kitchen Sink demos
+*/
+class IronSwiper extends PolymerElement {
+  static get is() {
+    return 'iron-swiper';
+  }
 
-  <template>
-    <style>
+  static get properties() {
+    return {
+
+      /**
+       * Internal storage for slide nodes
+       */
+      _nodes: {
+        type: Array,
+        value: []
+      },
+
+      /**
+       * Gets or sets the selected slide by index
+       */
+      selected: {
+        type: String,
+        value: 0,
+        notify: true,
+        observer: 'setSelected'
+      },
+
+      /**
+       * Set to true and click on any slide will produce transition to that slide
+       */
+      slideToClickedSlide: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable pagination functionality
+       */
+      pagination: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If true then clicking on pagination button will cause transition to appropriate slide
+       */
+      paginationClickable: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable navigation buttons
+       */
+      navigationButtons: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If `navigationButtons` then the next button icon can be set
+       */
+      nextIcon: {
+        type: String,
+        value: 'iron-swiper:arrow-forward'
+      },
+      /**
+       * If `navigationButtons` then the prev button icon can be set
+       */
+      prevIcon: {
+        type: String,
+        value: 'iron-swiper:arrow-back'
+      },
+
+      /**
+       * Enable scrollbar
+       */
+      scrollbar: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Initial slide to be shown
+       */
+      initialSlide: {
+        type: Boolean,
+        value: 0
+      },
+
+      /**
+       * Enable ARIA
+       */
+      a11y: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable continuous loop mode
+       */
+      loop: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Enable keyboard control
+       */
+      keyboard: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Other Swiper options
+       */
+      options: {
+        type: Object,
+        value: function() {return {};}
+      }
+    };
+  }
+
+  static get template(){
+    return html `
+    <style include="swiper-style">
        :host {
         display: block;
       }
@@ -148,145 +279,7 @@ $_documentContainer.innerHTML = `<dom-module id="iron-swiper">
       <div class="swiper-scrollbar" id="scrollbar" hidden="[[!scrollbar]]"></div>
 
     </div>
-  </template>
-
-  
-</dom-module>`;
-
-document.head.appendChild($_documentContainer);
-/**
- * @polymer
- * @extends HTMLElement
- */
-/**
-`iron-swiper`
-Polymer 2.x element that wraps around Swiper.js
-
-@demo demo/index.html
-@demo demo/selected.html Selected attribute usage
-@demo demo/all.html Kitchen Sink demos
-*/
-class IronSwiper extends PolymerElement {
-  static get is() {
-    return 'iron-swiper';
-  }
-
-  static get properties() {
-    return {
-
-      /**
-       * Internal storage for slide nodes
-       */
-      _nodes: {
-        type: Array,
-        value: []
-      },
-
-      /**
-       * Gets or sets the selected slide by index
-       */
-      selected: {
-        type: String,
-        value: 0,
-        notify: true,
-        observer: 'setSelected'
-      },
-
-      /**
-       * Set to true and click on any slide will produce transition to that slide
-       */
-      slideToClickedSlide: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable pagination functionality
-       */
-      pagination: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * If true then clicking on pagination button will cause transition to appropriate slide
-       */
-      paginationClickable: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable navigation buttons
-       */
-      navigationButtons: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * If `navigationButtons` then the next button icon can be set
-       */
-      nextIcon: {
-        type: String,
-        value: 'iron-swiper:arrow-forward'
-      },
-      /**
-       * If `navigationButtons` then the prev button icon can be set
-       */
-      prevIcon: {
-        type: String,
-        value: 'iron-swiper:arrow-back'
-      },
-
-      /**
-       * Enable scrollbar
-       */
-      scrollbar: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Initial slide to be shown
-       */
-      initialSlide: {
-        type: Boolean,
-        value: 0
-      },
-
-      /**
-       * Enable ARIA
-       */
-      a11y: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable continuous loop mode
-       */
-      loop: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Enable keyboard control
-       */
-      keyboard: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Other Swiper options
-       */
-      options: {
-        type: Object,
-        value: function() {return {};}
-      }
-    };
+    `;
   }
 
   ready() {

@@ -1,8 +1,43 @@
 {
-  "name": "iron-swiper",
-  "flat": true,
-  "version": "2.0.1",
+  "_from": "iron-swiper-3",
+  "_id": "iron-swiper-3@2.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-8LTf6sy35hFrtCNuO1hTGD73M0hmnw09AAI4LprA062C98z+qmOWymvCak24yamsmTBqsWWYVBUPN9G8DUfX2A==",
+  "_location": "/iron-swiper-3",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "iron-swiper-3",
+    "name": "iron-swiper-3",
+    "escapedName": "iron-swiper-3",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/iron-swiper-3/-/iron-swiper-3-2.0.1.tgz",
+  "_shasum": "ae0f35241becc185b86a8ae2dcf4c123603264fd",
+  "_spec": "iron-swiper-3",
+  "_where": "/mnt/c/wamp64/www/biness",
+  "bundleDependencies": false,
+  "dependencies": {
+    "@polymer/iron-icon": "^3.0.0-pre.1",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0",
+    "swiper": "^4.2.6"
+  },
+  "deprecated": false,
   "description": "Polymer 3.x element that wraps around Swiper.js",
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  },
+  "flat": true,
   "keywords": [
     "web-component",
     "web-components",
@@ -17,17 +52,8 @@
     "swipe",
     "mobile"
   ],
-  "main": "iron-swiper.html",
   "license": "MIT",
-  "dependencies": {
-    "@polymer/iron-icon": "^3.0.0-pre.1",
-    "@polymer/iron-iconset-svg": "^3.0.0-pre.1",
-    "@polymer/polymer": "^3.0.0",
-    "swiper": "^4.2.6"
-  },
-  "devDependencies": {
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "wct-browser-legacy": "^1.0.0"
-  }
+  "main": "iron-swiper.html",
+  "name": "iron-swiper-3",
+  "version": "2.0.1"
 }
