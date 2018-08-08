@@ -126,7 +126,11 @@ Polymer 2.x element that wraps around Swiper.js
       .swiper-container-rtl .swiper-button-prev {
         color: var(--iron-swiper-active-color, var(--secondary-color));
       }
-
+      
+      .swiper-pagination-bullet {
+        @apply --iron-swiper-pagination-bullet;
+      }
+			
       .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar .swiper-pagination-bullet-active,
       .swiper-pagination-progress .swiper-pagination-progressbar {
