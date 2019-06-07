@@ -334,7 +334,12 @@ Polymer 1.0 element that wraps around Swiper.js
                 this.fire('load', { img: img, url: url }, { bubbles: false });
               }.bind(this));
 
-              img.crossOrigin = true;
+              img.crossOrigin = 'anonymous';
+
+              if (/^http/.test(url)) {
+                url = url.concat('&t=', Date.now());
+              }
+
               img.src = url;
             }
 
