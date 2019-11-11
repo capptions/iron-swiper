@@ -137,7 +137,7 @@ Polymer 1.0 element that wraps around Swiper.js
       is: 'iron-swiper',
 
       listeners: {
-        'dom-change': 'attached',
+        'dom-change': 'initialize',
         'track': 'preventTrack'
       },
 
@@ -292,10 +292,15 @@ Polymer 1.0 element that wraps around Swiper.js
         e.preventDefault();
       },
 
-      attached: function () {
+      initialize: function (e) {
+        if (this._initalized) {
+          return;
+        }
+
         clearTimeout(this._initializer);
 
         this._initializer = setTimeout(function () {
+          this._initalized = true;
           // First clone real nodes into the wrapper
           var nodes = [];
           var slides = this.getEffectiveChildren()
@@ -353,11 +358,6 @@ Polymer 1.0 element that wraps around Swiper.js
       },
 
       render: function () {
-        // TODO: figure out a nicer way for this crap...
-        if (!this.$.wrapper.clientHeight) {
-          return setTimeout(this.render.bind(this), 50);
-        }
-
         if (this._swiper) {
           this.$.prev.classList.remove(this._swiper.params.buttonDisabledClass);
           this.$.next.classList.remove(this._swiper.params.buttonDisabledClass);
