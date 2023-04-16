@@ -11,7 +11,7 @@
 		"eslint-config-google": "^0.9.1",
 		"eslint-plugin-html": "^3.2.2",
 		"eslint-plugin-mocha": "^4.11.0",
-		"polymer-cli": "^1.5.4"
+		"polymer-cli": "^1.9.11"
 	},
 	"scripts": {
 		"start": "polymer serve -o",
